@@ -21,7 +21,7 @@ app.use(helmet());
 database
   .authenticate()
   .then(() => console.log("Database connected successfully"))
-  .catch(err => console.log("%c Error when connecting to database...: " + err, 'color: red'));
+  .catch(err => console.log("Error when connecting to database...: " + err));
 
 app.get("/", (req, res) => {
   res.send("<h1>Server side :)</h1>");
@@ -38,5 +38,6 @@ app.get("/", (req, res) => {
 // })
 
 app.listen(port, () => {
+  console.log("Starting running Master Backend app...");
   console.log(`Example app listening on port ${port}!`);
 });
