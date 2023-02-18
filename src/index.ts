@@ -20,8 +20,8 @@ app.use(helmet());
 
 database
   .authenticate()
-  .then(() => console.log("Database Connected suc"))
-  .catch(err => console.log("Error: " + err));
+  .then(() => console.log("Database connected successfully"))
+  .catch(err => console.log("%c Error when connecting to database...: " + err, 'color: red'));
 
 app.get("/", (req, res) => {
   res.send("<h1>Server side :)</h1>");
