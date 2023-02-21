@@ -6,6 +6,7 @@ import helmet from "helmet";
 import * as dotenv from "dotenv";
 import { Sequelize } from "sequelize";
 import { database } from "./database/config";
+import userRouter from "./routers/userRouter";
 
 dotenv.config();
 
@@ -27,17 +28,9 @@ app.get("/", (req, res) => {
   res.send("<h1>Server side :)</h1>");
 });
 
-// app.get('/users', (req, res) => {
-//     mysqlConnection.query("SELECT * from users", (err, results, fields) => {
-//         if(!err) {
-//             res.send(results);
-//         } else {
-//             console.log(err);
-//         }
-//     })
-// })
+app.get("/users", userRouter);
 
 app.listen(port, () => {
   console.log("Starting running Master Backend app...");
-  console.log(`Example app listening on port ${port}!`);
+  console.log(`App listening on port ${port}!`);
 });
