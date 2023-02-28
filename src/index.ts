@@ -56,6 +56,7 @@ app.get("/users", userRouter);
 app.get("/users/:id", userRouter);
 app.post("/users/register", userRouter);
 app.post("/users/login", userRouter);
+app.put("/users/:id", userRouter);
 app.put("/users/profile/:id", userRouter);
 app.delete("/users/:id", userRouter);
 
