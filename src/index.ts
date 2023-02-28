@@ -8,9 +8,11 @@ import passport from "passport";
 import passportJWT from "passport-jwt";
 
 import { sequelize } from "./database/config";
-import userRouter from "./routers/userRouter";
 import { userApiProxy } from "./middleware/proxyMiddleware";
 import User from "./models/userModel";
+import userRouter from "./routers/userRouter";
+import faqRouter from "./routers/faqRouter";
+import currencyRouter from "./routers/fiatCurrencyRouter";
 
 dotenv.config();
 
@@ -59,6 +61,15 @@ app.post("/users/login", userRouter);
 app.put("/users/:id", userRouter);
 app.put("/users/profile/:id", userRouter);
 app.delete("/users/:id", userRouter);
+
+//faqs
+app.get("/faqs", faqRouter);
+app.post("/faqs", faqRouter);
+app.put("/faqs/:id", faqRouter);
+app.delete("/faqs/:id", faqRouter);
+
+//currency
+app.get("/currency/fiat", currencyRouter);
 
 //Proxy
 app.use(userApiProxy);
