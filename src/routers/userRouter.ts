@@ -4,6 +4,7 @@ import * as dotenv from "dotenv";
 import passport from "passport";
 
 import { isAdmin } from "../utils/utils";
+import { logger } from "../utils/logger";
 
 dotenv.config();
 const userRouter = Router();
@@ -19,7 +20,10 @@ userRouter.get("/users", async (req, res) => {
 
     return res.status(200).json(data);
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    logger.error(error.stack);
+    logger.error(error.message);
+    logger.error(error.errors[0].message);
+    return res.status(500).json({ error: error.errors[0].message });
   }
 });
 
@@ -35,7 +39,10 @@ userRouter.get("/users/:id", passport.authenticate("jwt", { session: false }), a
 
     return res.status(200).json(data);
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    logger.error(error.stack);
+    logger.error(error.message);
+    logger.error(error.errors[0].message);
+    return res.status(500).json({ error: error.errors[0].message });
   }
 });
 
@@ -51,8 +58,10 @@ userRouter.post("/users/register", async (req, res) => {
 
     return res.status(200).json(data);
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: error.message });
+    logger.error(error.stack);
+    logger.error(error.message);
+    logger.error(error.errors[0].message);
+    return res.status(500).json({ error: error.errors[0].message });
   }
 });
 
@@ -68,8 +77,10 @@ userRouter.post("/users/login", async (req, res) => {
 
     return res.status(200).json(data);
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: error.message });
+    logger.error(error.stack);
+    logger.error(error.message);
+    logger.error(error.errors[0].message);
+    return res.status(500).json({ error: error.errors[0].message });
   }
 });
 
@@ -90,8 +101,10 @@ userRouter.put(
 
       return res.status(200).json(data);
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ error: error.message });
+      logger.error(error.stack);
+      logger.error(error.message);
+      logger.error(error.errors[0].message);
+      return res.status(500).json({ error: error.errors[0].message });
     }
   },
 );
@@ -112,8 +125,10 @@ userRouter.put(
 
       return res.status(200).json(data);
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ error: error.message });
+      logger.error(error.stack);
+      logger.error(error.message);
+      logger.error(error.errors[0].message);
+      return res.status(500).json({ error: error.errors[0].message });
     }
   },
 );
@@ -134,8 +149,10 @@ userRouter.delete(
 
       return res.status(200).json(data);
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ error: error.message });
+      logger.error(error.stack);
+      logger.error(error.message);
+      logger.error(error.errors[0].message);
+      return res.status(500).json({ error: error.errors[0].message });
     }
   },
 );

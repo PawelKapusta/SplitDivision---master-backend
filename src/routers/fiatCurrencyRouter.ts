@@ -1,6 +1,7 @@
 import express from "express";
 import axios from "axios";
 import * as dotenv from "dotenv";
+import { logger } from "../utils/logger";
 
 dotenv.config();
 const currencyRouter = express.Router();
@@ -24,6 +25,9 @@ currencyRouter.get("/currency/fiat", async (req, res) => {
     });
     res.end();
   } catch (error) {
+    logger.error(error.stack);
+    logger.error(error.message);
+    logger.error(error.errors[0].message);
     return res.status(500).json({ error: error.toString() });
   }
 });
