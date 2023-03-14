@@ -22,8 +22,7 @@ userRouter.get("/users", async (req, res) => {
   } catch (error) {
     logger.error(error.stack);
     logger.error(error.message);
-    logger.error(error.errors[0].message);
-    return res.status(500).json({ error: error.errors[0].message });
+    return res.status(500).json({ error: error.message });
   }
 });
 
@@ -41,8 +40,7 @@ userRouter.get("/users/:id", passport.authenticate("jwt", { session: false }), a
   } catch (error) {
     logger.error(error.stack);
     logger.error(error.message);
-    logger.error(error.errors[0].message);
-    return res.status(500).json({ error: error.errors[0].message });
+    return res.status(500).json({ error: error.message });
   }
 });
 
@@ -60,8 +58,7 @@ userRouter.post("/users/register", async (req, res) => {
   } catch (error) {
     logger.error(error.stack);
     logger.error(error.message);
-    logger.error(error.errors[0].message);
-    return res.status(500).json({ error: error.errors[0].message });
+    return res.status(500).json({ error: error.message });
   }
 });
 
@@ -79,8 +76,7 @@ userRouter.post("/users/login", async (req, res) => {
   } catch (error) {
     logger.error(error.stack);
     logger.error(error.message);
-    logger.error(error.errors[0].message);
-    return res.status(500).json({ error: error.errors[0].message });
+    return res.status(500).json({ error: error.message });
   }
 });
 
@@ -103,8 +99,7 @@ userRouter.put(
     } catch (error) {
       logger.error(error.stack);
       logger.error(error.message);
-      logger.error(error.errors[0].message);
-      return res.status(500).json({ error: error.errors[0].message });
+      return res.status(500).json({ error: error.message });
     }
   },
 );
@@ -127,8 +122,7 @@ userRouter.put(
     } catch (error) {
       logger.error(error.stack);
       logger.error(error.message);
-      logger.error(error.errors[0].message);
-      return res.status(500).json({ error: error.errors[0].message });
+      return res.status(500).json({ error: error.message });
     }
   },
 );
@@ -151,8 +145,7 @@ userRouter.delete(
     } catch (error) {
       logger.error(error.stack);
       logger.error(error.message);
-      logger.error(error.errors[0].message);
-      return res.status(500).json({ error: error.errors[0].message });
+      return res.status(500).json({ error: error.message });
     }
   },
 );

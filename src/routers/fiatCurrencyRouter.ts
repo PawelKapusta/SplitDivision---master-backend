@@ -27,7 +27,6 @@ currencyRouter.get("/currency/fiat", async (req, res) => {
   } catch (error) {
     logger.error(error.stack);
     logger.error(error.message);
-    logger.error(error.errors[0].message);
     return res.status(500).json({ error: error.toString() });
   }
 });

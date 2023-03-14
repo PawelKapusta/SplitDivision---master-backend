@@ -22,8 +22,7 @@ faqRouter.get("/faqs", async (req, res) => {
   } catch (error) {
     logger.error(error.stack);
     logger.error(error.message);
-    logger.error(error.errors[0].message);
-    return res.status(500).json({ error: error.errors[0].message });
+    return res.status(500).json({ error: error.message });
   }
 });
 
@@ -53,8 +52,7 @@ faqRouter.post(
     } catch (error) {
       logger.error(error.stack);
       logger.error(error.message);
-      logger.error(error.errors[0].message);
-      return res.status(500).json({ error: error.errors[0].message });
+      return res.status(500).json({ error: error.message });
     }
   },
 );
@@ -85,8 +83,7 @@ faqRouter.put(
     } catch (error) {
       logger.error(error.stack);
       logger.error(error.message);
-      logger.error(error.errors[0].message);
-      return res.status(500).json({ error: error.errors[0].message });
+      return res.status(500).json({ error: error.message });
     }
   },
 );
@@ -110,8 +107,7 @@ faqRouter.delete(
       console.error(error);
       logger.error(error.stack);
       logger.error(error.message);
-      logger.error(error.errors[0].message);
-      return res.status(500).json({ error: error.errors[0].message });
+      return res.status(500).json({ error: error.message });
     }
   },
 );
