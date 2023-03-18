@@ -1,11 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../database/config";
-
-interface FAQAttributes {
-  id: string;
-  question: string;
-  answer: string;
-}
+import { FAQAttributes } from "../constants/constants";
 
 class Faq extends Model<FAQAttributes, Optional<FAQAttributes, "id">> implements FAQAttributes {
   public id!: string;
