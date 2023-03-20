@@ -1,6 +1,7 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../database/config";
 import { GroupAttributes } from "../constants/constants";
+import User from "./userModel";
 
 class Group
   extends Model<GroupAttributes, Optional<GroupAttributes, "id">>
@@ -41,5 +42,8 @@ Group.init(
     timestamps: false,
   },
 );
+
+Group.belongsToMany(User, { through: "groups_users" });
+User.belongsToMany(Group, { through: "groups_users" });
 
 export default Group;

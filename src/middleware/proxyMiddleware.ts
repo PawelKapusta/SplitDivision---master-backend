@@ -13,4 +13,9 @@ const groupApiProxy = createProxyMiddleware({
   changeOrigin: true,
 });
 
-export { userApiProxy, groupApiProxy };
+const billApiProxy = createProxyMiddleware({
+  target: process.env.BILL_API_URL,
+  changeOrigin: true,
+});
+
+export { userApiProxy, groupApiProxy, billApiProxy };

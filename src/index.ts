@@ -8,7 +8,7 @@ import passport from "passport";
 import passportJWT from "passport-jwt";
 
 import { sequelize } from "./database/config";
-import { groupApiProxy, userApiProxy } from "./middleware/proxyMiddleware";
+import { billApiProxy, groupApiProxy, userApiProxy } from "./middleware/proxyMiddleware";
 import User from "./models/userModel";
 import userRouter from "./routers/userRouter";
 import faqRouter from "./routers/faqRouter";
@@ -82,6 +82,7 @@ app.get("/currency/fiat", currencyRouter);
 //Proxy
 app.use(userApiProxy);
 app.use(groupApiProxy);
+app.use(billApiProxy);
 
 app.listen(port, () => {
   console.log("Starting running Master Backend app...");

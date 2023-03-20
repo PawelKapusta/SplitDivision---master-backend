@@ -2,6 +2,8 @@ import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../database/config";
 import { parsePhoneNumber } from "libphonenumber-js";
 import { UserAttributes } from "../constants/constants";
+import Group from "../models/groupModel";
+import Bill from "./billModel";
 
 class User extends Model<UserAttributes, Optional<UserAttributes, "id">> implements UserAttributes {
   public id!: string;
@@ -116,5 +118,11 @@ User.init(
     timestamps: false,
   },
 );
+
+User.belongsToMany(Group, { through: "user_groups" });
+Group.belongsToMany(User, { through: "user_groups" });
+
+User.belongsToMany(Bill, { through: "bills_users" });
+Bill.belongsToMany(User, { through: "bills_users" });
 
 export default User;

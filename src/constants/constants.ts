@@ -26,3 +26,18 @@ export interface FAQAttributes {
   question: string;
   answer: string;
 }
+
+export interface BillAttributes {
+  id: string;
+  name: string;
+  description: string;
+  data_created: Date;
+  data_end: Date;
+  bill_image: string;
+  currency_type: string;
+  currency_code: string;
+  debt: number;
+  code_qr: string;
+  owner_id: string;
+  group_id: string;
+}
