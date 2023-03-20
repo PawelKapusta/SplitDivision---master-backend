@@ -8,12 +8,19 @@ import passport from "passport";
 import passportJWT from "passport-jwt";
 
 import { sequelize } from "./database/config";
-import { billApiProxy, groupApiProxy, userApiProxy } from "./middleware/proxyMiddleware";
+import {
+  billApiProxy,
+  groupApiProxy,
+  userApiProxy,
+  subscriptionApiProxy,
+  commentApiProxy,
+} from "./middleware/proxyMiddleware";
 import User from "./models/userModel";
 import userRouter from "./routers/userRouter";
 import faqRouter from "./routers/faqRouter";
 import currencyRouter from "./routers/fiatCurrencyRouter";
 import groupRouter from "./routers/groupRouter";
+import billRouter from "./routers/billRouter";
 
 dotenv.config();
 
@@ -70,6 +77,13 @@ app.post("/groups", groupRouter);
 app.put("/groups/:id", groupRouter);
 app.delete("/groups/:id", groupRouter);
 
+//bills
+app.get("/bills", billRouter);
+app.get("/bills/:id", billRouter);
+app.post("/bills", billRouter);
+app.put("/bills/:id", billRouter);
+app.delete("/bills/:id", billRouter);
+
 //faqs
 app.get("/faqs", faqRouter);
 app.post("/faqs", faqRouter);
@@ -83,6 +97,8 @@ app.get("/currency/fiat", currencyRouter);
 app.use(userApiProxy);
 app.use(groupApiProxy);
 app.use(billApiProxy);
+app.use(subscriptionApiProxy);
+app.use(commentApiProxy);
 
 app.listen(port, () => {
   console.log("Starting running Master Backend app...");

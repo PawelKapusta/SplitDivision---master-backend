@@ -18,4 +18,14 @@ const billApiProxy = createProxyMiddleware({
   changeOrigin: true,
 });
 
-export { userApiProxy, groupApiProxy, billApiProxy };
+const subscriptionApiProxy = createProxyMiddleware({
+  target: process.env.SUBSCRIPTION_API_URL,
+  changeOrigin: true,
+});
+
+const commentApiProxy = createProxyMiddleware({
+  target: process.env.COMMENT_API_URL,
+  changeOrigin: true,
+});
+
+export { userApiProxy, groupApiProxy, billApiProxy, subscriptionApiProxy, commentApiProxy };

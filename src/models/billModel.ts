@@ -6,7 +6,7 @@ import Group from "./groupModel";
 
 class Bill extends Model<BillAttributes, Optional<BillAttributes, "id">> implements BillAttributes {
   public id!: string;
-  public name: string;
+  public name!: string;
   public description!: string;
   public data_created!: Date;
   public data_end!: Date;
@@ -60,7 +60,7 @@ Bill.init(
       allowNull: false,
     },
     debt: {
-      type: DataTypes.NUMBER,
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
     code_qr: {

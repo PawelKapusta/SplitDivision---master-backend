@@ -41,3 +41,11 @@ export interface BillAttributes {
   owner_id: string;
   group_id: string;
 }
+
+export interface SubscriptionAttributes {
+  id: string;
+  type: string;
+  currency_type: string;
+  currency_code: string;
+  features: Record<string, unknown>;
+}
