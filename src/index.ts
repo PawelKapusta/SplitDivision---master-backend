@@ -21,6 +21,8 @@ import faqRouter from "./routers/faqRouter";
 import currencyRouter from "./routers/fiatCurrencyRouter";
 import groupRouter from "./routers/groupRouter";
 import billRouter from "./routers/billRouter";
+import subscriptionRouter from "./routers/subscriptionRouter";
+import commentRouter from "./routers/commentRouter";
 
 dotenv.config();
 
@@ -83,6 +85,25 @@ app.get("/bills/:id", billRouter);
 app.post("/bills", billRouter);
 app.put("/bills/:id", billRouter);
 app.delete("/bills/:id", billRouter);
+
+//subscriptions
+app.get("/subscriptions", subscriptionRouter);
+app.get("/subscriptions/:id", subscriptionRouter);
+app.post("/subscriptions", subscriptionRouter);
+app.put("/subscriptions/:id", subscriptionRouter);
+app.delete("/subscriptions/:id", subscriptionRouter);
+
+//comments and subcomments
+app.get("/comments", commentRouter);
+app.get("/comments/:id", commentRouter);
+app.post("/comments", commentRouter);
+app.put("/comments/:id", commentRouter);
+app.delete("/comments/:id", commentRouter);
+app.get("/subcomments", commentRouter);
+app.get("/subcomments/:id", commentRouter);
+app.post("/subcomments", commentRouter);
+app.put("/subcomments/:id", commentRouter);
+app.delete("/subcomments/:id", commentRouter);
 
 //faqs
 app.get("/faqs", faqRouter);

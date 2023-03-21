@@ -49,3 +49,22 @@ export interface SubscriptionAttributes {
   currency_code: string;
   features: Record<string, unknown>;
 }
+
+export interface CommentAttributes {
+  id: string;
+  content: string;
+  likes_number: number;
+  dislikes_number: number;
+  owner_id: string;
+  bill_id: string;
+}
+
+export interface SubcommentAttributes {
+  id: string;
+  content: string;
+  likes_number: number;
+  dislikes_number: number;
+  comment_id: string;
+  owner_id: string;
+  bill_id: string;
+}
