@@ -123,6 +123,6 @@ app.use(subscriptionApiProxy);
 app.use(commentApiProxy);
 
 app.listen(port, () => {
-  consoleLogger.info("Starting running Master Backend app...");
+  consoleLogger.info("Starting running API GATEWAY (BFF) - Master Backend app...");
   consoleLogger.info(`App listening on port ${port}!`);
 });
