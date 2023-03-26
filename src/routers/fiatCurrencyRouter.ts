@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import axios from "axios";
 import * as dotenv from "dotenv";
 import { logger } from "../utils/logger";
@@ -7,7 +7,7 @@ dotenv.config();
 const currencyRouter = express.Router();
 const FIAT_CURRENCY_API_URL = process.env.FIAT_CURRENCY_API_URL;
 
-currencyRouter.get("/currency/fiat", async (req, res) => {
+currencyRouter.get("/currency/fiat", async (req: Request, res: Response) => {
   try {
     const data = axios.get(FIAT_CURRENCY_API_URL);
     const currency = await Promise.all([data]);

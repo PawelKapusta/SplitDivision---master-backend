@@ -90,9 +90,9 @@ Bill.init(
   },
 );
 
-User.belongsToMany(Bill, { through: "bills_users" });
-Bill.belongsToMany(User, { through: "bills_users" });
-
-Group.hasMany(Bill);
+// User.belongsToMany(Bill, { through: "bills_users" });
+// Bill.belongsToMany(User, { through: "bills_users" });
+//
+// Group.hasMany(Bill);
 
 export default Bill;

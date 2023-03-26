@@ -23,6 +23,7 @@ import groupRouter from "./routers/groupRouter";
 import billRouter from "./routers/billRouter";
 import subscriptionRouter from "./routers/subscriptionRouter";
 import commentRouter from "./routers/commentRouter";
+import { consoleLogger } from "./utils/logger";
 
 dotenv.config();
 
@@ -56,8 +57,8 @@ app.use(helmet());
 
 sequelize
   .authenticate()
-  .then(() => console.log("Database connected successfully"))
-  .catch(err => console.log("Error when connecting to database...: " + err));
+  .then(() => consoleLogger.info("Database connected successfully"))
+  .catch(err => consoleLogger.info("Error when connecting to database...: " + err));
 
 app.get("/", (req, res) => {
   res.send("<h1>Server side :)</h1>");
@@ -122,6 +123,6 @@ app.use(subscriptionApiProxy);
 app.use(commentApiProxy);
 
 app.listen(port, () => {
-  console.log("Starting running Master Backend app...");
-  console.log(`App listening on port ${port}!`);
+  consoleLogger.info("Starting running Master Backend app...");
+  consoleLogger.info(`App listening on port ${port}!`);
 });

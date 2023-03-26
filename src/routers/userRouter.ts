@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import axios from "axios";
 import * as dotenv from "dotenv";
 import passport from "passport";
@@ -10,7 +10,7 @@ dotenv.config();
 const userRouter = Router();
 const USER_API_URL = process.env.USER_API_URL;
 
-userRouter.get("/users", async (req, res) => {
+userRouter.get("/users", async (req: Request, res: Response) => {
   try {
     const { data } = await axios.get(`${USER_API_URL}/users`);
 
@@ -26,25 +26,29 @@ userRouter.get("/users", async (req, res) => {
   }
 });
 
-userRouter.get("/users/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
-  const userId: string = req.params.id;
+userRouter.get(
+  "/users/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req: Request, res: Response) => {
+    const userId: string = req.params.id;
 
-  try {
-    const { data } = await axios.get(`${USER_API_URL}/users/${userId}`);
+    try {
+      const { data } = await axios.get(`${USER_API_URL}/users/${userId}`);
 
-    if (!data) {
-      return res.status(404).send("User not found");
+      if (!data) {
+        return res.status(404).send("User not found");
+      }
+
+      return res.status(200).json(data);
+    } catch (error) {
+      logger.error(error.stack);
+      logger.error(error.message);
+      return res.status(500).json({ error: error.message });
     }
+  },
+);
 
-    return res.status(200).json(data);
-  } catch (error) {
-    logger.error(error.stack);
-    logger.error(error.message);
-    return res.status(500).json({ error: error.message });
-  }
-});
-
-userRouter.post("/users/register", async (req, res) => {
+userRouter.post("/users/register", async (req: Request, res: Response) => {
   const user = req.body;
 
   try {
@@ -62,7 +66,7 @@ userRouter.post("/users/register", async (req, res) => {
   }
 });
 
-userRouter.post("/users/login", async (req, res) => {
+userRouter.post("/users/login", async (req: Request, res: Response) => {
   const user = req.body;
 
   try {
@@ -84,7 +88,7 @@ userRouter.put(
   "/users/:id",
   passport.authenticate("jwt", { session: false }),
   isAdmin,
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const userId = req.params.id;
     const user = req.body;
 
@@ -107,7 +111,7 @@ userRouter.put(
 userRouter.put(
   "/users/profile/:id",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const userId = req.params.id;
     const user = req.body;
 
@@ -131,7 +135,7 @@ userRouter.delete(
   "/users/:id",
   passport.authenticate("jwt", { session: false }),
   isAdmin,
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const userId = req.params.id;
 
     try {

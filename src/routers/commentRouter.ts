@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import axios from "axios";
 import * as dotenv from "dotenv";
 import passport from "passport";
@@ -10,7 +10,7 @@ dotenv.config();
 const commentRouter = Router();
 const COMMENT_API_URL = process.env.COMMENT_API_URL;
 
-commentRouter.get("/comments", async (req, res) => {
+commentRouter.get("/comments", async (req: Request, res: Response) => {
   try {
     const { data } = await axios.get(`${COMMENT_API_URL}/comments`);
 
@@ -29,7 +29,7 @@ commentRouter.get("/comments", async (req, res) => {
 commentRouter.get(
   "/comments/:id",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const commentId: string = req.params.id;
 
     try {
@@ -48,7 +48,7 @@ commentRouter.get(
   },
 );
 
-commentRouter.post("/comments", async (req, res) => {
+commentRouter.post("/comments", async (req: Request, res: Response) => {
   const comment = req.body;
 
   try {
@@ -69,7 +69,7 @@ commentRouter.post("/comments", async (req, res) => {
 commentRouter.put(
   "/comments/:id",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const commentId = req.params.id;
     const comment = req.body;
 
@@ -93,7 +93,7 @@ commentRouter.delete(
   "/comments/:id",
   passport.authenticate("jwt", { session: false }),
   isAdmin,
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const commentId = req.params.id;
 
     try {
@@ -112,7 +112,7 @@ commentRouter.delete(
   },
 );
 
-commentRouter.get("/subcomments", async (req, res) => {
+commentRouter.get("/subcomments", async (req: Request, res: Response) => {
   try {
     const { data } = await axios.get(`${COMMENT_API_URL}/subcomments`);
 
@@ -131,7 +131,7 @@ commentRouter.get("/subcomments", async (req, res) => {
 commentRouter.get(
   "/subcomments/:id",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const subcommentId: string = req.params.id;
 
     try {
@@ -150,7 +150,7 @@ commentRouter.get(
   },
 );
 
-commentRouter.post("/subcomments", async (req, res) => {
+commentRouter.post("/subcomments", async (req: Request, res: Response) => {
   const subcomment = req.body;
 
   try {
@@ -171,7 +171,7 @@ commentRouter.post("/subcomments", async (req, res) => {
 commentRouter.put(
   "/subcomments/:id",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const subcommentId = req.params.id;
     const subcomment = req.body;
 
@@ -198,7 +198,7 @@ commentRouter.delete(
   "/subcomments/:id",
   passport.authenticate("jwt", { session: false }),
   isAdmin,
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const subcommentId = req.params.id;
 
     try {

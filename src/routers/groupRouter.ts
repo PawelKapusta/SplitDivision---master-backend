@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import axios from "axios";
 import * as dotenv from "dotenv";
 import passport from "passport";
@@ -10,7 +10,7 @@ dotenv.config();
 const groupRouter = Router();
 const GROUP_API_URL = process.env.GROUP_API_URL;
 
-groupRouter.get("/groups", async (req, res) => {
+groupRouter.get("/groups", async (req: Request, res: Response) => {
   try {
     const { data } = await axios.get(`${groupRouter}/groups`);
 
@@ -29,7 +29,7 @@ groupRouter.get("/groups", async (req, res) => {
 groupRouter.get(
   "/groups/:id",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const groupId: string = req.params.id;
 
     try {
@@ -48,7 +48,7 @@ groupRouter.get(
   },
 );
 
-groupRouter.post("/groups", async (req, res) => {
+groupRouter.post("/groups", async (req: Request, res: Response) => {
   const group = req.body;
 
   try {
@@ -69,7 +69,7 @@ groupRouter.post("/groups", async (req, res) => {
 groupRouter.put(
   "/groups/:id",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const groupId = req.params.id;
     const group = req.body;
 
@@ -93,7 +93,7 @@ groupRouter.delete(
   "/groups/:id",
   passport.authenticate("jwt", { session: false }),
   isAdmin,
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const groupId = req.params.id;
 
     try {

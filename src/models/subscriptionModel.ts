@@ -1,7 +1,6 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import { sequelize } from "../database/config";
 import { SubscriptionAttributes } from "../constants/constants";
-import User from "./userModel";
 
 class Subscription
   extends Model<SubscriptionAttributes, Optional<SubscriptionAttributes, "id">>
@@ -45,7 +44,7 @@ Subscription.init(
   },
 );
 
-User.belongsToMany(Subscription, { through: "subscriptions_users" });
-Subscription.belongsToMany(User, { through: "subscriptions_users" });
+// User.belongsToMany(Subscription, { through: "subscriptions_users" });
+// Subscription.belongsToMany(User, { through: "subscriptions_users" });
 
 export default Subscription;

@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import * as dotenv from "dotenv";
 import passport from "passport";
 import { v4 as uuidv4 } from "uuid";
@@ -10,7 +10,7 @@ import { logger } from "../utils/logger";
 dotenv.config();
 const faqRouter = Router();
 
-faqRouter.get("/faqs", async (req, res) => {
+faqRouter.get("/faqs", async (req: Request, res: Response) => {
   try {
     const faqs = await Faq.findAll();
 
@@ -30,7 +30,7 @@ faqRouter.post(
   "/faqs",
   passport.authenticate("jwt", { session: false }),
   isAdmin,
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const { question, answer } = req.body;
 
     try {
@@ -61,7 +61,7 @@ faqRouter.put(
   "/faqs/:id",
   passport.authenticate("jwt", { session: false }),
   isAdmin,
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const faqId = req.params.id;
     const { question, answer } = req.body;
 
@@ -92,7 +92,7 @@ faqRouter.delete(
   "/faqs/:id",
   passport.authenticate("jwt", { session: false }),
   isAdmin,
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     try {
       const faqId = req.params.id;
 
@@ -104,7 +104,6 @@ faqRouter.delete(
 
       return res.status(200).json({ message: "FAQ successfully deleted from the system!" });
     } catch (error) {
-      console.error(error);
       logger.error(error.stack);
       logger.error(error.message);
       return res.status(500).json({ error: error.message });

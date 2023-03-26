@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import axios from "axios";
 import * as dotenv from "dotenv";
 import passport from "passport";
@@ -10,7 +10,7 @@ dotenv.config();
 const billRouter = Router();
 const BILL_API_URL = process.env.BILL_API_URL;
 
-billRouter.get("/bills", async (req, res) => {
+billRouter.get("/bills", async (req: Request, res: Response) => {
   try {
     const { data } = await axios.get(`${BILL_API_URL}/bills`);
 
@@ -26,25 +26,29 @@ billRouter.get("/bills", async (req, res) => {
   }
 });
 
-billRouter.get("/bills/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
-  const billId: string = req.params.id;
+billRouter.get(
+  "/bills/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req: Request, res: Response) => {
+    const billId: string = req.params.id;
 
-  try {
-    const { data } = await axios.get(`${BILL_API_URL}/bills/${billId}`);
+    try {
+      const { data } = await axios.get(`${BILL_API_URL}/bills/${billId}`);
 
-    if (!data) {
-      return res.status(404).send("Bill not found");
+      if (!data) {
+        return res.status(404).send("Bill not found");
+      }
+
+      return res.status(200).json(data);
+    } catch (error) {
+      logger.error(error.stack);
+      logger.error(error.message);
+      return res.status(500).json({ error: error.message });
     }
+  },
+);
 
-    return res.status(200).json(data);
-  } catch (error) {
-    logger.error(error.stack);
-    logger.error(error.message);
-    return res.status(500).json({ error: error.message });
-  }
-});
-
-billRouter.post("/bills", async (req, res) => {
+billRouter.post("/bills", async (req: Request, res: Response) => {
   const bill = req.body;
 
   try {
@@ -62,30 +66,34 @@ billRouter.post("/bills", async (req, res) => {
   }
 });
 
-billRouter.put("/bills/:id", passport.authenticate("jwt", { session: false }), async (req, res) => {
-  const billId = req.params.id;
-  const bill = req.body;
+billRouter.put(
+  "/bills/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req: Request, res: Response) => {
+    const billId = req.params.id;
+    const bill = req.body;
 
-  try {
-    const { data } = await axios.put(`${BILL_API_URL}/bills/${billId}`, bill);
+    try {
+      const { data } = await axios.put(`${BILL_API_URL}/bills/${billId}`, bill);
 
-    if (!data) {
-      return res.status(404).send("This bill not exists in the system");
+      if (!data) {
+        return res.status(404).send("This bill not exists in the system");
+      }
+
+      return res.status(200).json(data);
+    } catch (error) {
+      logger.error(error.stack);
+      logger.error(error.message);
+      return res.status(500).json({ error: error.message });
     }
-
-    return res.status(200).json(data);
-  } catch (error) {
-    logger.error(error.stack);
-    logger.error(error.message);
-    return res.status(500).json({ error: error.message });
-  }
-});
+  },
+);
 
 billRouter.delete(
   "/bills/:id",
   passport.authenticate("jwt", { session: false }),
   isAdmin,
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const billId = req.params.id;
 
     try {

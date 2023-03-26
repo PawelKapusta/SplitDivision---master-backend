@@ -61,7 +61,7 @@ Comment.init(
   },
 );
 
-User.hasMany(Comment);
-Bill.hasMany(Comment);
+// User.hasMany(Comment);
+// Bill.hasMany(Comment);
 
 export default Comment;

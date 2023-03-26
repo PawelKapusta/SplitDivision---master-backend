@@ -71,8 +71,8 @@ Subcomment.init(
   },
 );
 
-User.hasMany(Subcomment);
-Bill.hasMany(Subcomment);
-Comment.hasMany(Subcomment);
+// User.hasMany(Subcomment);
+// Bill.hasMany(Subcomment);
+// Comment.hasMany(Subcomment);
 
 export default Subcomment;

@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Request, Response, Router } from "express";
 import axios from "axios";
 import * as dotenv from "dotenv";
 import passport from "passport";
@@ -10,7 +10,7 @@ dotenv.config();
 const subscriptionRouter = Router();
 const SUBSCRIPTION_API_URL = process.env.SUBSCRIPTION_API_URL;
 
-subscriptionRouter.get("/subscriptions", async (req, res) => {
+subscriptionRouter.get("/subscriptions", async (req: Request, res: Response) => {
   try {
     const { data } = await axios.get(`${SUBSCRIPTION_API_URL}/subscriptions`);
 
@@ -29,7 +29,7 @@ subscriptionRouter.get("/subscriptions", async (req, res) => {
 subscriptionRouter.get(
   "/subscriptions/:id",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const subscriptionId: string = req.params.id;
 
     try {
@@ -48,7 +48,7 @@ subscriptionRouter.get(
   },
 );
 
-subscriptionRouter.post("/subscriptions", async (req, res) => {
+subscriptionRouter.post("/subscriptions", async (req: Request, res: Response) => {
   const subscription = req.body;
 
   try {
@@ -69,7 +69,7 @@ subscriptionRouter.post("/subscriptions", async (req, res) => {
 subscriptionRouter.put(
   "/subscriptions/:id",
   passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const subscriptionId = req.params.id;
     const subscription = req.body;
 
@@ -96,7 +96,7 @@ subscriptionRouter.delete(
   "/subscriptions/:id",
   passport.authenticate("jwt", { session: false }),
   isAdmin,
-  async (req, res) => {
+  async (req: Request, res: Response) => {
     const subscriptionId = req.params.id;
 
     try {
