@@ -115,7 +115,7 @@ app.delete("/faqs/:id", faqRouter);
 //currency
 app.get("/currency/fiat", currencyRouter);
 
-//Proxy
+// Proxy;
 app.use(userApiProxy);
 app.use(groupApiProxy);
 app.use(billApiProxy);

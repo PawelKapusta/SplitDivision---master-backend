@@ -62,25 +62,24 @@ userRouter.post("/users/register", async (req: Request, res: Response) => {
   } catch (error) {
     logger.error(error.stack);
     logger.error(error.message);
-    return res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.response.data });
   }
 });
 
 userRouter.post("/users/login", async (req: Request, res: Response) => {
   const user = req.body;
-
   try {
     const { data } = await axios.post(`${USER_API_URL}/users/login `, user);
-
-    if (!data) {
-      return res.status(409).send("Email or password is not correct");
+    if (data.error) {
+      return res.status(409).json({ error: data.error });
     }
 
     return res.status(200).json(data);
   } catch (error) {
     logger.error(error.stack);
     logger.error(error.message);
-    return res.status(500).json({ error: error.message });
+    logger.error(error.response.data);
+    return res.status(500).json({ error: error.response.data });
   }
 });
 
