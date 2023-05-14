@@ -76,6 +76,7 @@ app.delete("/users/:id", userRouter);
 //groups
 app.get("/groups", groupRouter);
 app.get("/groups/:id", groupRouter);
+app.get("/groups/user/:id", groupRouter);
 app.post("/groups", groupRouter);
 app.put("/groups/:id", groupRouter);
 app.delete("/groups/:id", groupRouter);
