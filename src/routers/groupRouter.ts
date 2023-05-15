@@ -49,6 +49,28 @@ groupRouter.get(
 );
 
 groupRouter.get(
+  "/groups/:id/users",
+  passport.authenticate("jwt", { session: false }),
+  async (req: Request, res: Response) => {
+    const groupId: string = req.params.id;
+
+    try {
+      const { data } = await axios.get(`${GROUP_API_URL}/groups/${groupId}/users`);
+
+      if (!data) {
+        return res.status(404).send("Users not found");
+      }
+
+      return res.status(200).json(data);
+    } catch (error) {
+      logger.error(error.stack);
+      logger.error(error.message);
+      return res.status(500).json({ error: error.message });
+    }
+  },
+);
+
+groupRouter.get(
   "/groups/user/:id",
   passport.authenticate("jwt", { session: false }),
   async (req: Request, res: Response) => {
