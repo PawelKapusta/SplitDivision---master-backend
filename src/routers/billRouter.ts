@@ -48,6 +48,28 @@ billRouter.get(
   },
 );
 
+billRouter.get(
+  "/bills/user/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req: Request, res: Response) => {
+    const userId: string = req.params.id;
+
+    try {
+      const { data } = await axios.get(`${BILL_API_URL}/bills/user/${userId}`);
+
+      if (!data) {
+        return res.status(404).send("Bills-users not found");
+      }
+
+      return res.status(200).json(data);
+    } catch (error) {
+      logger.error(error.stack);
+      logger.error(error.message);
+      return res.status(500).json({ error: error.message });
+    }
+  },
+);
+
 billRouter.post("/bills", async (req: Request, res: Response) => {
   const bill = req.body;
 
