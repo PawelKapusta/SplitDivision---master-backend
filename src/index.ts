@@ -86,6 +86,7 @@ app.delete("/groups/:id", groupRouter);
 app.get("/bills", billRouter);
 app.get("/bills/:id", billRouter);
 app.get("/bills/user/:id", billRouter);
+app.get("/bills/group/:id", billRouter);
 app.post("/bills", billRouter);
 app.put("/bills/:id", billRouter);
 app.delete("/bills/:id", billRouter);
