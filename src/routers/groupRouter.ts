@@ -10,21 +10,25 @@ dotenv.config();
 const groupRouter = Router();
 const GROUP_API_URL = process.env.GROUP_API_URL;
 
-groupRouter.get("/groups", async (req: Request, res: Response) => {
-  try {
-    const { data } = await axios.get(`${groupRouter}/groups`);
+groupRouter.get(
+  "/groups",
+  passport.authenticate("jwt", { session: false }),
+  async (req: Request, res: Response) => {
+    try {
+      const { data } = await axios.get(`${GROUP_API_URL}/groups`);
 
-    if (!data) {
-      return res.status(404).send("Groups not found");
+      if (!data) {
+        return res.status(404).send("Groups not found");
+      }
+
+      return res.status(200).json(data);
+    } catch (error) {
+      logger.error(error.stack);
+      logger.error(error.message);
+      return res.status(500).json({ error: error.message });
     }
-
-    return res.status(200).json(data);
-  } catch (error) {
-    logger.error(error.stack);
-    logger.error(error.message);
-    return res.status(500).json({ error: error.message });
-  }
-});
+  },
+);
 
 groupRouter.get(
   "/groups/:id",
