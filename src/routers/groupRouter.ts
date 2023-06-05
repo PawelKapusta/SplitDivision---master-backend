@@ -142,10 +142,8 @@ groupRouter.delete(
   passport.authenticate("jwt", { session: false }),
   async (req: Request, res: Response) => {
     const groupId = req.params.id;
-
     try {
       const { data } = await axios.delete(`${GROUP_API_URL}/groups/${groupId}`);
-
       if (!data) {
         return res.status(409).send("This group is already in the system");
       }
