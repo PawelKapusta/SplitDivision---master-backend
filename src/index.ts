@@ -64,7 +64,6 @@ app.get("/", (req, res) => {
   res.send("<h1>Server side :)</h1>");
 });
 
-//users
 app.get("/users", userRouter);
 app.get("/users/:id", userRouter);
 app.post("/users/register", userRouter);
@@ -73,7 +72,6 @@ app.put("/users/:id", userRouter);
 app.put("/users/profile/:id", userRouter);
 app.delete("/users/:id", userRouter);
 
-//groups
 app.get("/groups", groupRouter);
 app.get("/groups/:id", groupRouter);
 app.get("/groups/:id/users", groupRouter);
@@ -82,7 +80,6 @@ app.post("/groups", groupRouter);
 app.put("/groups/:id", groupRouter);
 app.delete("/groups/:id", groupRouter);
 
-//bills
 app.get("/bills", billRouter);
 app.get("/bills/:id", billRouter);
 app.get("/bills/user/:id", billRouter);
@@ -91,14 +88,12 @@ app.post("/bills", billRouter);
 app.put("/bills/:id", billRouter);
 app.delete("/bills/:id", billRouter);
 
-//subscriptions
 app.get("/subscriptions", subscriptionRouter);
 app.get("/subscriptions/:id", subscriptionRouter);
 app.post("/subscriptions", subscriptionRouter);
 app.put("/subscriptions/:id", subscriptionRouter);
 app.delete("/subscriptions/:id", subscriptionRouter);
 
-//comments and subcomments
 app.get("/comments", commentRouter);
 app.get("/comments/:id", commentRouter);
 app.post("/comments", commentRouter);
@@ -110,16 +105,13 @@ app.post("/subcomments", commentRouter);
 app.put("/subcomments/:id", commentRouter);
 app.delete("/subcomments/:id", commentRouter);
 
-//faqs
 app.get("/faqs", faqRouter);
 app.post("/faqs", faqRouter);
 app.put("/faqs/:id", faqRouter);
 app.delete("/faqs/:id", faqRouter);
 
-//currency
 app.get("/currency/fiat", currencyRouter);
 
-// Proxy;
 app.use(userApiProxy);
 app.use(groupApiProxy);
 app.use(billApiProxy);

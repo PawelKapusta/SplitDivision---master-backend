@@ -136,7 +136,6 @@ billRouter.put(
 billRouter.delete(
   "/bills/:id",
   passport.authenticate("jwt", { session: false }),
-  isAdmin,
   async (req: Request, res: Response) => {
     const billId = req.params.id;
 
