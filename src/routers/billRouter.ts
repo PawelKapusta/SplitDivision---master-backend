@@ -5,6 +5,7 @@ import passport from "passport";
 
 import { isAdmin } from "../utils/utils";
 import { logger } from "../utils/logger";
+import groupRouter from "./groupRouter";
 
 dotenv.config();
 const billRouter = Router();
@@ -37,6 +38,28 @@ billRouter.get(
 
       if (!data) {
         return res.status(404).send("Bill not found");
+      }
+
+      return res.status(200).json(data);
+    } catch (error) {
+      logger.error(error.stack);
+      logger.error(error.message);
+      return res.status(500).json({ error: error.message });
+    }
+  },
+);
+
+billRouter.get(
+  "/bills/:id/users",
+  passport.authenticate("jwt", { session: false }),
+  async (req: Request, res: Response) => {
+    const billId: string = req.params.id;
+
+    try {
+      const { data } = await axios.get(`${BILL_API_URL}/bills/${billId}/users`);
+
+      if (!data) {
+        return res.status(404).send("Users in bill not found");
       }
 
       return res.status(200).json(data);
