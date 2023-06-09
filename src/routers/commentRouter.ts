@@ -48,6 +48,28 @@ commentRouter.get(
   },
 );
 
+commentRouter.get(
+  "/comments/bill/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req: Request, res: Response) => {
+    const billId: string = req.params.id;
+
+    try {
+      const { data } = await axios.get(`${COMMENT_API_URL}/comments/bill/${billId}`);
+
+      if (!data) {
+        return res.status(404).send("Comments for this bill not found");
+      }
+
+      return res.status(200).json(data);
+    } catch (error) {
+      logger.error(error.stack);
+      logger.error(error.message);
+      return res.status(500).json({ error: error.message });
+    }
+  },
+);
+
 commentRouter.post("/comments", async (req: Request, res: Response) => {
   const comment = req.body;
 

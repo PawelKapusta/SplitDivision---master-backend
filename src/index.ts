@@ -97,6 +97,7 @@ app.delete("/subscriptions/:id", subscriptionRouter);
 
 app.get("/comments", commentRouter);
 app.get("/comments/:id", commentRouter);
+app.get("/comments/bill/:id", commentRouter);
 app.post("/comments", commentRouter);
 app.put("/comments/:id", commentRouter);
 app.delete("/comments/:id", commentRouter);
