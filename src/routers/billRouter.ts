@@ -2,10 +2,8 @@ import { Request, Response, Router } from "express";
 import axios from "axios";
 import * as dotenv from "dotenv";
 import passport from "passport";
-
 import { isAdmin } from "../utils/utils";
 import { logger } from "../utils/logger";
-import groupRouter from "./groupRouter";
 
 dotenv.config();
 const billRouter = Router();

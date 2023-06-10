@@ -48,6 +48,28 @@ subscriptionRouter.get(
   },
 );
 
+subscriptionRouter.get(
+  "/subscriptions/user/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req: Request, res: Response) => {
+    const userId: string = req.params.id;
+
+    try {
+      const { data } = await axios.get(`${SUBSCRIPTION_API_URL}/subscriptions/user/${userId}`);
+
+      if (!data) {
+        return res.status(404).send("Subscriptions-users not found");
+      }
+
+      return res.status(200).json(data);
+    } catch (error) {
+      logger.error(error.stack);
+      logger.error(error.message);
+      return res.status(500).json({ error: error.message });
+    }
+  },
+);
+
 subscriptionRouter.post("/subscriptions", async (req: Request, res: Response) => {
   const subscription = req.body;
 
@@ -56,6 +78,27 @@ subscriptionRouter.post("/subscriptions", async (req: Request, res: Response) =>
 
     if (!data) {
       return res.status(409).send("This subscription is already in the system");
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    logger.error(error.stack);
+    logger.error(error.message);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
+subscriptionRouter.post("/subscriptions/user", async (req: Request, res: Response) => {
+  const subscriptionsUsers = req.body;
+
+  try {
+    const { data } = await axios.post(
+      `${SUBSCRIPTION_API_URL}/subscriptions/user `,
+      subscriptionsUsers,
+    );
+
+    if (!data) {
+      return res.status(409).send("This subscription for this user is already in the system");
     }
 
     return res.status(200).json(data);

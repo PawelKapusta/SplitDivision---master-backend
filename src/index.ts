@@ -91,7 +91,9 @@ app.delete("/bills/:id", billRouter);
 
 app.get("/subscriptions", subscriptionRouter);
 app.get("/subscriptions/:id", subscriptionRouter);
+app.get("/subscriptions/user/:id", subscriptionRouter);
 app.post("/subscriptions", subscriptionRouter);
+app.post("/subscriptions/user", subscriptionRouter);
 app.put("/subscriptions/:id", subscriptionRouter);
 app.delete("/subscriptions/:id", subscriptionRouter);
 
