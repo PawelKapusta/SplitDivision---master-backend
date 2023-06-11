@@ -154,6 +154,29 @@ billRouter.put(
   },
 );
 
+billRouter.put(
+  "/bills/user/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req: Request, res: Response) => {
+    const bills_usersId = req.params.id;
+    const bills_users = req.body;
+
+    try {
+      const { data } = await axios.put(`${BILL_API_URL}/bills/user/${bills_usersId}`, bills_users);
+
+      if (!data) {
+        return res.status(404).send("This bills_users not exists in the system");
+      }
+
+      return res.status(200).json(data);
+    } catch (error) {
+      logger.error(error.stack);
+      logger.error(error.message);
+      return res.status(500).json({ error: error.message });
+    }
+  },
+);
+
 billRouter.delete(
   "/bills/:id",
   passport.authenticate("jwt", { session: false }),

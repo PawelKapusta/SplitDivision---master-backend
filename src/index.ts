@@ -87,6 +87,7 @@ app.get("/bills/group/:id", billRouter);
 app.get("/bills/:id/users", billRouter);
 app.post("/bills", billRouter);
 app.put("/bills/:id", billRouter);
+app.put("/bills/user/:id", billRouter);
 app.delete("/bills/:id", billRouter);
 
 app.get("/subscriptions", subscriptionRouter);
