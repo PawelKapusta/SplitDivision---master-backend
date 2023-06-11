@@ -219,7 +219,6 @@ commentRouter.put(
 commentRouter.delete(
   "/subcomments/:id",
   passport.authenticate("jwt", { session: false }),
-  isAdmin,
   async (req: Request, res: Response) => {
     const subcommentId = req.params.id;
 
