@@ -26,6 +26,22 @@ subscriptionRouter.get("/subscriptions", async (req: Request, res: Response) => 
   }
 });
 
+subscriptionRouter.get("/subscriptions/bought", async (req: Request, res: Response) => {
+  try {
+    const { data } = await axios.get(`${SUBSCRIPTION_API_URL}/subscriptions/bought`);
+
+    if (!data) {
+      return res.status(404).send("Subscriptions bought not found");
+    }
+
+    return res.status(200).json(data);
+  } catch (error) {
+    logger.error(error.stack);
+    logger.error(error.message);
+    return res.status(500).json({ error: error.message });
+  }
+});
+
 subscriptionRouter.get(
   "/subscriptions/:id",
   passport.authenticate("jwt", { session: false }),

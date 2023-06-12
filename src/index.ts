@@ -91,6 +91,7 @@ app.put("/bills/user/:id", billRouter);
 app.delete("/bills/:id", billRouter);
 
 app.get("/subscriptions", subscriptionRouter);
+app.get("/subscriptions/bought", subscriptionRouter);
 app.get("/subscriptions/:id", subscriptionRouter);
 app.get("/subscriptions/user/:id", subscriptionRouter);
 app.post("/subscriptions", subscriptionRouter);
@@ -100,6 +101,7 @@ app.delete("/subscriptions/:id", subscriptionRouter);
 
 app.get("/comments", commentRouter);
 app.get("/comments/:id", commentRouter);
+app.get("/comments/subcomments/user/:id", commentRouter);
 app.get("/comments/bill/:id", commentRouter);
 app.post("/comments", commentRouter);
 app.put("/comments/:id", commentRouter);

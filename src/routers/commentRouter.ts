@@ -49,6 +49,28 @@ commentRouter.get(
 );
 
 commentRouter.get(
+  "/comments/subcomments/user/:id",
+  passport.authenticate("jwt", { session: false }),
+  async (req: Request, res: Response) => {
+    const userId: string = req.params.id;
+
+    try {
+      const { data } = await axios.get(`${COMMENT_API_URL}/comments/subcomments/user/${userId}`);
+
+      if (!data) {
+        return res.status(404).send("Comments subcomments users not found");
+      }
+
+      return res.status(200).json(data);
+    } catch (error) {
+      logger.error(error.stack);
+      logger.error(error.message);
+      return res.status(500).json({ error: error.message });
+    }
+  },
+);
+
+commentRouter.get(
   "/comments/bill/:id",
   passport.authenticate("jwt", { session: false }),
   async (req: Request, res: Response) => {
