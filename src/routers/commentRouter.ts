@@ -136,7 +136,6 @@ commentRouter.put(
 commentRouter.delete(
   "/comments/:id",
   passport.authenticate("jwt", { session: false }),
-  isAdmin,
   async (req: Request, res: Response) => {
     const commentId = req.params.id;
 
