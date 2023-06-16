@@ -118,7 +118,7 @@ userRouter.put(
       const { data } = await axios.put(`${USER_API_URL}/users/profile/${userId}`, user);
 
       if (!data) {
-        return res.status(404).send("This user is already in the system");
+        return res.status(404).send("This user not exists in the system");
       }
 
       return res.status(200).json(data);
@@ -141,7 +141,7 @@ userRouter.delete(
       const { data } = await axios.delete(`${USER_API_URL}/users/${userId}`);
 
       if (!data) {
-        return res.status(409).send("This user is already in the system");
+        return res.status(409).send("This user not exists in the system");
       }
 
       return res.status(200).json(data);
